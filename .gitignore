@@ -1,0 +1,9 @@
+*.apk
+.mono
+.import
+*.translation
+export_presets.cfg
+android
+addons
+.vscode
+log.md

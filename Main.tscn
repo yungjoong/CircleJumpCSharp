@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Main.cs" type="Script" id=1]
+[ext_resource path="res://UI/Screens.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/audio/Music_Light-Puzzles.ogg" type="AudioStream" id=4]
+[ext_resource path="res://UI/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://admob-lib/admob.gd" type="Script" id=6]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 219.144, 689.962 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 215.94, 674.803 )
+offset = Vector2( 0, -200 )
+current = true
+smoothing_enabled = true
+smoothing_speed = 8.0
+
+[node name="Screens" parent="." instance=ExtResource( 2 )]
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+
+[node name="MusicFade" type="Tween" parent="."]
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource( 6 )
+banner_on_top = false
+banner_id = "ca-app-pub-3940256099942544/6300978111"
+interstitial_id = "ca-app-pub-3940256099942544/1033173712"
+rewarded_id = "ca-app-pub-3940256099942544/5224354917"
+[connection signal="StartGame" from="Screens" to="." method="NewGame"]

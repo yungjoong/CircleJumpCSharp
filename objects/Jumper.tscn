@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/images/jumper.png" type="Texture" id=1]
+[ext_resource path="res://objects/Jumper.cs" type="Script" id=2]
+[ext_resource path="res://assets/audio/88.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/70.ogg" type="AudioStream" id=5]
+
+[sub_resource type="Gradient" id=1]
+
+[node name="Jumper" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -1.06065, -5.30331 )
+polygon = PoolVector2Array( -1.57333, -29.0504, 31.6607, 7.01196, 0.194435, 37.4175, -18.5439, 7.36552 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="Trail" type="Node" parent="."]
+
+[node name="Points" type="Line2D" parent="Trail"]
+points = PoolVector2Array( -55, 148 )
+gradient = SubResource( 1 )
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Capture" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+[connection signal="area_entered" from="." to="." method="OnJumperAreaEntered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="OnVisibilityNotifier2DScreenExited"]
